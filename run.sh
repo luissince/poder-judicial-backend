@@ -9,7 +9,7 @@ docker build -t poder-judicial-backend .
 docker run -d \
 --restart always \
 --name poder-judicial-backend \
---net=upla \
+--net=luis \
 -p 8892:80 \
 -v $(pwd)/logs:/etc/app \
 poder-judicial-backend
