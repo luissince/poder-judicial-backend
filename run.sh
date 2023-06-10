@@ -10,6 +10,6 @@ docker run -d \
 --restart always \
 --name poder-judicial-backend \
 --net=luis \
--p 8892:80 \
+-p 8890:80 \
 -v $(pwd)/logs:/etc/app \
 poder-judicial-backend
