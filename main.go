@@ -72,7 +72,7 @@ func handlePDFRequestGin(c *gin.Context) {
 		return
 	}
 
-	pdfBytes, err := pdf.CrearPdf(&data)
+	pdfBytes, err := pdf.CrearPdf(data)
 	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return

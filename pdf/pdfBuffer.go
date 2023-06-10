@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"fmt"
 
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -10,13 +11,16 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
-func CrearPdf(pdfData *Data) (*bytes.Buffer, error) {
+func CrearPdf(pdfData Data) (*bytes.Buffer, error) {
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 10, 10)
 
 	builHeading(m)
-	builBody(m, *pdfData)
+	fmt.Println("----------------")
+	fmt.Println(pdfData.Fecha)
+	// fmt.Println(pdfData.NombreSistema)
+	builBody(m, pdfData)
 
 	bufferPdf, err := m.Output()
 	if err != nil {
@@ -198,7 +202,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("----", props.Text{
+			m.Text(info.UsuarioNombre, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -216,7 +220,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("-----", props.Text{
+			m.Text(info.CelularAxeso, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -236,7 +240,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("----", props.Text{
+			m.Text(info.Sede, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -254,7 +258,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("-----", props.Text{
+			m.Text(info.Cargo, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -290,7 +294,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("----", props.Text{
+			m.Text(info.PersonaReporte, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -308,7 +312,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text("-----", props.Text{
+			m.Text(info.CelularPersona, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -330,7 +334,7 @@ func builBody(m pdf.Maroto, info Data) {
 				Style: consts.Bold,
 				Align: consts.Middle,
 			})
-			m.Text("08/06/2023", props.Text{
+			m.Text(info.Fecha, props.Text{
 				Top:   1,
 				Size:  12,
 				Left:  25,
@@ -343,7 +347,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(8, func() {
 		m.Col(12, func() {
-			m.Text("(Describir y evidenciar la incidencia)", props.Text{
+			m.Text(info.Descripcion, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -371,7 +375,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(8, func() {
 		m.Col(12, func() {
-			m.Text("Seleccione", props.Text{
+			m.Text(info.Descartes, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
