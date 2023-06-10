@@ -1,15 +1,15 @@
 mkdir logs
 
-docker stop porder-judicial && docker rm stop porder-judicial
+docker stop poder-judicial-backend && docker rm stop poder-judicial-backend
 
-docker image rm stop porder-judicial
+docker image rm stop poder-judicial-backend
 
-docker build -t stop porder-judicial .
+docker build -t stop poder-judicial-backend .
 
 docker run -d \
 --restart always \
---name stop porder-judicial \
---net=upla \
+--name stop poder-judicial-backend \
+--net=luis \
 -p 8892:80 \
--v $(pwd)/logs:/etc/app-movil \
-stop porder-judicial
+-v $(pwd)/logs:/etc/app \
+stop poder-judicial-backend
