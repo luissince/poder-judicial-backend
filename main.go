@@ -5,9 +5,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 // type Data struct {
@@ -25,6 +27,12 @@ import (
 // }
 
 func main() {
+
+	// Cargar las variables de entorno desde el archivo .env
+	godotenv.Load()
+
+	// Obtener el valor de la variable de entorno GO_PORT
+	var go_port string = os.Getenv("GO_PORT")
 
 	router := gin.Default()
 
@@ -44,7 +52,7 @@ func main() {
 	})
 	router.POST("/pdf", handlePDFRequestGin)
 
-	err := router.Run(":8080")
+	err := router.Run(go_port)
 	if err != nil {
 		log.Fatal("Error al iniciar el servidor: ", err)
 	}
