@@ -30,6 +30,18 @@ func main() {
 
 	router.Use(cors.Default())
 
+	// Middleware para manejar el error 404
+	router.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{"message": "Ruta no encontrada."})
+	})
+
+	// Rutas
+	router.GET("/", func(c *gin.Context) {
+		log.Println("Endpoint ping")
+		c.JSON(http.StatusOK, gin.H{
+			"message": "API GO LANG APP MOVIL UPLA",
+		})
+	})
 	router.POST("/pdf", handlePDFRequestGin)
 
 	err := router.Run(":8080")
