@@ -12,4 +12,6 @@ type Data struct {
 	Fecha          string `json:"fecha,omitempty"`
 	Descripcion    string `json:"descripcion,omitempty"`
 	Descartes      string `json:"descartes,omitempty"`
+	Base64Str      string `json:"base64Str,omitempty"`
+	Extension      string `json:"extension,omitempty"`
 }

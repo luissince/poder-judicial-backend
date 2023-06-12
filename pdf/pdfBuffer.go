@@ -2,7 +2,6 @@ package pdf
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -17,9 +16,6 @@ func CrearPdf(pdfData Data) (*bytes.Buffer, error) {
 	m.SetPageMargins(10, 10, 10)
 
 	builHeading(m)
-	fmt.Println("----------------")
-	fmt.Println(pdfData.Fecha)
-	// fmt.Println(pdfData.NombreSistema)
 	builBody(m, pdfData)
 
 	bufferPdf, err := m.Output()
@@ -416,7 +412,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(75, func() {
 		m.Col(12, func() {
-			err := m.FileImage("pdf/captura.png", props.Rect{
+			err := m.FileImage("pdf/output.png", props.Rect{
 				Center:  true,
 				Percent: 95,
 			})
