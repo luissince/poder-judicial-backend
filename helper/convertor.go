@@ -56,7 +56,7 @@ func SaveImage(imageData []byte, imageType, filename string) error {
 	case "jpg", "jpeg":
 		img, err = jpeg.Decode(strings.NewReader(string(imageData)))
 	default:
-		return fmt.Errorf("Formato de imagen no soportado")
+		return fmt.Errorf("El formato no se pudo decodificar.")
 	}
 
 	if err != nil {
@@ -69,7 +69,7 @@ func SaveImage(imageData []byte, imageType, filename string) error {
 	case "jpg", "jpeg":
 		err = jpeg.Encode(file, img, nil)
 	default:
-		return fmt.Errorf("Formato de imagen no soportado")
+		return fmt.Errorf("El formato no se pudo guardar.")
 	}
 
 	if err != nil {
