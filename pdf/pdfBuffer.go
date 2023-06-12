@@ -412,7 +412,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(75, func() {
 		m.Col(12, func() {
-			err := m.FileImage("pdf/output.png", props.Rect{
+			err := m.FileImage("pdf/output."+info.Extension, props.Rect{
 				Center:  true,
 				Percent: 95,
 			})

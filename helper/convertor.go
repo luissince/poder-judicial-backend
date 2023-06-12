@@ -41,6 +41,7 @@ func ExtractImageType(base64Str string) string {
 }
 
 // Guarda los datos de imagen en un archivo
+
 func SaveImage(imageData []byte, imageType, filename string) error {
 	file, err := os.Create(filename)
 	if err != nil {
@@ -52,7 +53,7 @@ func SaveImage(imageData []byte, imageType, filename string) error {
 	switch imageType {
 	case "png":
 		img, err = png.Decode(strings.NewReader(string(imageData)))
-	case "jpeg", "jpg":
+	case "jpg", "jpeg":
 		img, err = jpeg.Decode(strings.NewReader(string(imageData)))
 	default:
 		return fmt.Errorf("Formato de imagen no soportado")
@@ -62,7 +63,15 @@ func SaveImage(imageData []byte, imageType, filename string) error {
 		return err
 	}
 
-	err = png.Encode(file, img)
+	switch imageType {
+	case "png":
+		err = png.Encode(file, img)
+	case "jpg", "jpeg":
+		err = jpeg.Encode(file, img, nil)
+	default:
+		return fmt.Errorf("Formato de imagen no soportado")
+	}
+
 	if err != nil {
 		return err
 	}

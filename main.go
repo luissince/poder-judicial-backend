@@ -4,6 +4,9 @@ import (
 	"api-pdf/helper"
 	"api-pdf/pdf"
 	"fmt"
+	"image"
+	_ "image/jpeg" // Importa el formato JPEG
+	_ "image/png"  // Importa el formato PNG
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -54,30 +57,46 @@ func main() {
 	})
 
 	router.GET("/base64", func(c *gin.Context) {
-		data := ""
-		extension := ""
+		filePath := "pdf/juan.jpeg" // Reemplaza con la ruta de tu imagen
 
-		base64Str := "data:image/" + extension + ";base64," + data
-
-		imageData := helper.ExtractImageData(base64Str)
-		if imageData == nil {
-			fmt.Println("No se pudo extraer la imagen base64")
-			return
-		}
-
-		imageType := helper.ExtractImageType(base64Str)
-		if imageType == "" {
-			fmt.Println("No se pudo determinar el tipo de imagen")
-			return
-		}
-
-		err := helper.SaveImage(imageData, imageType, "output.png")
+		file, err := os.Open(filePath)
 		if err != nil {
-			fmt.Println("Error al guardar la imagen:", err)
+			fmt.Printf("Error al abrir el archivo: %v", err)
+			return
+		}
+		defer file.Close()
+
+		_, format, err := image.DecodeConfig(file)
+		if err != nil {
+			fmt.Printf("Error al decodificar la configuración de la imagen: %v", err)
 			return
 		}
 
-		fmt.Println("Imagen guardada exitosamente")
+		fmt.Printf("Formato de la imagen: %s\n", format)
+		// data := ""
+		// extension := ""
+
+		// base64Str := "data:image/" + extension + ";base64," + data
+
+		// imageData := helper.ExtractImageData(base64Str)
+		// if imageData == nil {
+		// 	fmt.Println("No se pudo extraer la imagen base64")
+		// 	return
+		// }
+
+		// imageType := helper.ExtractImageType(base64Str)
+		// if imageType == "" {
+		// 	fmt.Println("No se pudo determinar el tipo de imagen")
+		// 	return
+		// }
+
+		// err := helper.SaveImage(imageData, imageType, "output.png")
+		// if err != nil {
+		// 	fmt.Println("Error al guardar la imagen:", err)
+		// 	return
+		// }
+
+		// fmt.Println("Imagen guardada exitosamente")
 
 		c.JSON(http.StatusOK, gin.H{
 			"message": "BASE 64 CONVERTOR",
@@ -119,7 +138,7 @@ func handlePDFRequestGin(c *gin.Context) {
 		return
 	}
 
-	err := helper.SaveImage(imageData, imageType, "pdf/output.png")
+	err := helper.SaveImage(imageData, imageType, "pdf/output."+data.Extension)
 	if err != nil {
 		fmt.Println("Error al guardar la imagen:", err)
 		return
@@ -127,12 +146,14 @@ func handlePDFRequestGin(c *gin.Context) {
 
 	pdfBytes, err := pdf.CrearPdf(data)
 	if err != nil {
+		fmt.Println("Error en crear el pdf:", err)
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	pdfMemory, err := ioutil.ReadAll(pdfBytes)
 	if err != nil {
+		fmt.Println("Error en leer la imagen:", err)
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
