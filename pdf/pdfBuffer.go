@@ -434,12 +434,14 @@ func builBody(m pdf.Maroto, info Data) {
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(item.Descripcion, props.Text{
-					Top:   1,
-					Left:  1,
-					Size:  10,
-					Style: consts.Bold,
-					Align: consts.Left,
+					Extrapolate: false,
+					Top:         1,
+					Left:        1,
+					Size:        10,
+					Style:       consts.Bold,
+					Align:       consts.Left,
 				})
+
 			})
 
 		})
