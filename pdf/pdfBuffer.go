@@ -410,23 +410,40 @@ func builBody(m pdf.Maroto, info Data) {
 
 	})
 
-	m.Row(75, func() {
-		m.Col(12, func() {
-			err := m.FileImage("pdf/output."+info.Extension, props.Rect{
-				Center:  true,
-				Percent: 95,
+	for _, item := range info.Imagenes {
+		m.Row(75, func() {
+			m.Col(12, func() {
+				err := m.FileImage("pdf/output."+item.Extension, props.Rect{
+					Center:  true,
+					Percent: 95,
+				})
+
+				if err != nil {
+					m.Text("Captura", props.Text{
+						Top:  1,
+						Size: 12,
+						// Style: consts.Bold,
+						Align: consts.Center,
+					})
+				}
+			})
+		})
+
+		m.SetBackgroundColor(color.NewWhite())
+
+		m.Row(20, func() {
+			m.Col(12, func() {
+				m.Text(item.Descripcion, props.Text{
+					Top:   1,
+					Left:  1,
+					Size:  10,
+					Style: consts.Bold,
+					Align: consts.Left,
+				})
 			})
 
-			if err != nil {
-				m.Text("Captura", props.Text{
-					Top:  1,
-					Size: 12,
-					// Style: consts.Bold,
-					Align: consts.Center,
-				})
-			}
 		})
-	})
+	}
 
 	// Parámetros de prueba de Desarrollo*
 

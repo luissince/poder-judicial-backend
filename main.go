@@ -51,6 +51,7 @@ func main() {
 	// Rutas
 	router.GET("/", func(c *gin.Context) {
 		log.Println("Endpoint ping")
+
 		c.JSON(http.StatusOK, gin.H{
 			"message": "API GO LANG APP MOVIL UPLA",
 		})
@@ -115,7 +116,6 @@ func main() {
 }
 
 func handlePDFRequestGin(c *gin.Context) {
-
 	var data pdf.Data
 
 	if err := c.BindJSON(&data); err != nil {
@@ -124,24 +124,26 @@ func handlePDFRequestGin(c *gin.Context) {
 		return
 	}
 
-	base64Str := "data:image/" + data.Extension + ";base64," + data.Base64Str
+	for _, item := range data.Imagenes {
+		base64String := "data:image/" + item.Extension + ";base64," + item.Base64String
 
-	imageData := helper.ExtractImageData(base64Str)
-	if imageData == nil {
-		fmt.Println("No se pudo extraer la imagen base64")
-		return
-	}
+		imageData := helper.ExtractImageData(base64String)
+		if imageData == nil {
+			fmt.Println("No se pudo extraer la imagen base64")
+			return
+		}
 
-	imageType := helper.ExtractImageType(base64Str)
-	if imageType == "" {
-		fmt.Println("No se pudo determinar el tipo de imagen")
-		return
-	}
+		imageType := helper.ExtractImageType(base64String)
+		if imageType == "" {
+			fmt.Println("No se pudo determinar el tipo de imagen")
+			return
+		}
 
-	err := helper.SaveImage(imageData, imageType, "pdf/output."+data.Extension)
-	if err != nil {
-		fmt.Println("Error al guardar la imagen:", err)
-		return
+		err := helper.SaveImage(imageData, imageType, "pdf/output."+item.Extension)
+		if err != nil {
+			fmt.Println("Error al guardar la imagen:", err)
+			return
+		}
 	}
 
 	pdfBytes, err := pdf.CrearPdf(data)
