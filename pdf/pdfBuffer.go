@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"strconv"
 
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -410,10 +411,12 @@ func builBody(m pdf.Maroto, info Data) {
 
 	})
 
+	var count int
 	for _, item := range info.Imagenes {
+		count++
 		m.Row(75, func() {
 			m.Col(12, func() {
-				err := m.FileImage("pdf/output."+item.Extension, props.Rect{
+				err := m.FileImage("pdf/"+strconv.Itoa(count)+"output."+item.Extension, props.Rect{
 					Center:  true,
 					Percent: 95,
 				})

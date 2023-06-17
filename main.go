@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -124,6 +125,7 @@ func handlePDFRequestGin(c *gin.Context) {
 		return
 	}
 
+	var count int
 	for _, item := range data.Imagenes {
 		base64String := "data:image/" + item.Extension + ";base64," + item.Base64String
 
@@ -139,7 +141,8 @@ func handlePDFRequestGin(c *gin.Context) {
 			return
 		}
 
-		err := helper.SaveImage(imageData, imageType, "pdf/output."+item.Extension)
+		count++
+		err := helper.SaveImage(imageData, imageType, "pdf/"+strconv.Itoa(count)+"output."+item.Extension)
 		if err != nil {
 			fmt.Println("Error al guardar la imagen:", err)
 			return
