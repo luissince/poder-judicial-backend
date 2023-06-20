@@ -2,7 +2,6 @@ package pdf
 
 import (
 	"bytes"
-	"fmt"
 	"strconv"
 
 	"github.com/johnfercher/maroto/pkg/color"
@@ -343,7 +342,7 @@ func builBody(m pdf.Maroto, info Data) {
 	})
 	m.SetBackgroundColor(color.NewWhite())
 
-	m.Row(8, func() {
+	m.Row(16, func() {
 		m.Col(12, func() {
 			m.Text(info.Descripcion, props.Text{
 				Top:   1,
@@ -370,10 +369,61 @@ func builBody(m pdf.Maroto, info Data) {
 		})
 	})
 	m.SetBackgroundColor(color.NewWhite())
-	fmt.Println("Si o no: " + info.DescarteAcepta)
 	m.Row(8, func() {
 		m.Col(12, func() {
-			m.Text(info.Descartes+" "+info.DescarteAcepta, props.Text{
+			m.Text("1. ¿El mismo incidente se reproduce en otro equipo? "+info.PreguntaUno, props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Left,
+			})
+		})
+
+	})
+
+	m.Row(8, func() {
+		m.Col(12, func() {
+			m.Text("2. ¿El mismo incidente se reproduce con otros usuarios? "+info.PreguntaDos, props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Left,
+			})
+		})
+
+	})
+
+	m.Row(8, func() {
+		m.Col(12, func() {
+			m.Text("3. ¿El incidente ocurre solo con un expediente? "+info.PreguntaTres, props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Left,
+			})
+		})
+
+	})
+
+	m.Row(8, func() {
+		m.Col(12, func() {
+			m.Text("4. ¿Lo reportado ha sido validado por implantación? "+info.PreguntaCuatro, props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Left,
+			})
+		})
+
+	})
+
+	m.Row(8, func() {
+		m.Col(12, func() {
+			m.Text("5. ¿Se está utilizando la última versión de la aplicación desplegada en la corte? "+info.PreguntaCinco, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,

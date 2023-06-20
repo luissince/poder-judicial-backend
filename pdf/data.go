@@ -11,7 +11,10 @@ type Data struct {
 	CelularPersona string   `json:"celularPersona,omitempty"`
 	Fecha          string   `json:"fecha,omitempty"`
 	Descripcion    string   `json:"descripcion,omitempty"`
-	Descartes      string   `json:"descartes,omitempty"`
-	DescarteAcepta string   `json:"descarteAcepta,omitempty"`
+	PreguntaUno    string   `json:"preguntaUno,omitempty"`
+	PreguntaDos    string   `json:"preguntaDos,omitempty"`
+	PreguntaTres   string   `json:"preguntaTres,omitempty"`
+	PreguntaCuatro string   `json:"preguntaCuatro,omitempty"`
+	PreguntaCinco  string   `json:"preguntaCinco,omitempty"`
 	Imagenes       []Imagen `json:"imagenes"`
 }
