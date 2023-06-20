@@ -12,5 +12,6 @@ type Data struct {
 	Fecha          string   `json:"fecha,omitempty"`
 	Descripcion    string   `json:"descripcion,omitempty"`
 	Descartes      string   `json:"descartes,omitempty"`
+	DescarteAcepta string   `json:"descarteAcepta,omitempty"`
 	Imagenes       []Imagen `json:"imagenes"`
 }

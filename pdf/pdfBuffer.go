@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"fmt"
 	"strconv"
 
 	"github.com/johnfercher/maroto/pkg/color"
@@ -349,7 +350,7 @@ func builBody(m pdf.Maroto, info Data) {
 				Left:  1,
 				Size:  10,
 				Style: consts.Bold,
-				Align: consts.Center,
+				Align: consts.Left,
 			})
 		})
 
@@ -369,15 +370,15 @@ func builBody(m pdf.Maroto, info Data) {
 		})
 	})
 	m.SetBackgroundColor(color.NewWhite())
-
+	fmt.Println("Si o no: " + info.DescarteAcepta)
 	m.Row(8, func() {
 		m.Col(12, func() {
-			m.Text(info.Descartes, props.Text{
+			m.Text(info.Descartes+" "+info.DescarteAcepta, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Bold,
-				Align: consts.Center,
+				Align: consts.Left,
 			})
 		})
 
