@@ -146,13 +146,24 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(3, func() {
-			m.Text(info.NombreSistema, props.Text{
-				Top:   1,
-				Left:  1,
-				Size:  10,
-				Style: consts.Normal,
-				Align: consts.Left,
-			})
+			if info.NombreSIJ != "" {
+				m.Text(info.NombreSIJ, props.Text{
+					Top:   1,
+					Left:  1,
+					Size:  10,
+					Style: consts.Normal,
+					Align: consts.Left,
+				})
+			} else {
+				m.Text(info.NombreWEB, props.Text{
+					Top:   1,
+					Left:  1,
+					Size:  10,
+					Style: consts.Normal,
+					Align: consts.Left,
+				})
+			}
+
 		})
 		m.Col(3, func() {
 			m.Text("Versión", props.Text{

@@ -1,7 +1,8 @@
 package pdf
 
 type Data struct {
-	NombreSistema  string   `json:"nombreSistema,omitempty"`
+	NombreSIJ      string   `json:"nombreSIJ,omitempty"`
+	NombreWEB      string   `json:"nombreWEB,omitempty"`
 	VersionSistema string   `json:"versionSistema,omitempty"`
 	UsuarioNombre  string   `json:"usuarioNombre,omitempty"`
 	CelularAxeso   string   `json:"celularAxeso,omitempty"`
