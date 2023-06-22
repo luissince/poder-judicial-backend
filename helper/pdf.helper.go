@@ -3,6 +3,7 @@ package helper
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/pdf"
@@ -51,4 +52,11 @@ func CrearCarpeta(rutaCarpeta string) {
 		// La carpeta ya existe
 		fmt.Println("La carpeta ya existe.")
 	}
+}
+
+func TernarioSiNo(valor string, evaluar string) string {
+	if strings.ToLower(valor) == strings.ToLower(evaluar) {
+		return strings.ToUpper(valor)
+	}
+	return ""
 }

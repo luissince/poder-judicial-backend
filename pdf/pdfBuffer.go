@@ -373,8 +373,8 @@ func builBody(m pdf.Maroto, info Data) {
 	})
 	m.SetBackgroundColor(color.NewWhite())
 	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("1. ¿El mismo incidente se reproduce en otro equipo? "+info.PreguntaUno, props.Text{
+		m.Col(10, func() {
+			m.Text("1. ¿El mismo incidente se reproduce en otro equipo? ", props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -383,11 +383,29 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaUno, "si"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaUno, "no"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
 	})
 
 	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("2. ¿El mismo incidente se reproduce con otros usuarios? "+info.PreguntaDos, props.Text{
+		m.Col(10, func() {
+			m.Text("2. ¿El mismo incidente se reproduce con otros usuarios? ", props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -395,12 +413,29 @@ func builBody(m pdf.Maroto, info Data) {
 				Align: consts.Left,
 			})
 		})
-
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaDos, "si"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaDos, "no"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
 	})
 
 	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("3. ¿El incidente ocurre solo con un expediente? "+info.PreguntaTres, props.Text{
+		m.Col(10, func() {
+			m.Text("3. ¿El incidente ocurre solo con un expediente? ", props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -408,12 +443,29 @@ func builBody(m pdf.Maroto, info Data) {
 				Align: consts.Left,
 			})
 		})
-
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaTres, "si"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaTres, "no"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
 	})
 
 	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("4. ¿Lo reportado ha sido validado por implantación? "+info.PreguntaCuatro, props.Text{
+		m.Col(10, func() {
+			m.Text("4. ¿Lo reportado ha sido validado por implantación? ", props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -421,12 +473,29 @@ func builBody(m pdf.Maroto, info Data) {
 				Align: consts.Left,
 			})
 		})
-
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaCuatro, "si"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaCuatro, "no"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
 	})
 
 	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("5. ¿Se está utilizando la última versión de la aplicación desplegada en la corte? "+info.PreguntaCinco, props.Text{
+		m.Col(10, func() {
+			m.Text("5. ¿Se está utilizando la última versión de la aplicación desplegada en la corte? ", props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -434,7 +503,24 @@ func builBody(m pdf.Maroto, info Data) {
 				Align: consts.Left,
 			})
 		})
-
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaCinco, "si"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
+		m.Col(1, func() {
+			m.Text(helper.TernarioSiNo(info.PreguntaCinco, "no"), props.Text{
+				Top:   1,
+				Left:  1,
+				Size:  10,
+				Style: consts.Bold,
+				Align: consts.Center,
+			})
+		})
 	})
 
 	// FLUJO
