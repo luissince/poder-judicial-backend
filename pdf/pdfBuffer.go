@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
+	"github.com/signintech/gopdf"
 
 	"github.com/johnfercher/maroto/pkg/props"
 )
@@ -641,4 +642,10 @@ func grayColor() color.Color {
 		Green: 220,
 		Blue:  220,
 	}
+}
+
+func getTextWidth(pdfMaroto gopdf.GoPdf, fontSize float64, text string) float64 {
+	pdfMaroto.SetFont("Helvetica", "", fontSize)
+	textWidth, _ := pdfMaroto.MeasureTextWidth(text)
+	return textWidth
 }
