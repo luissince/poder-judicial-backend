@@ -83,6 +83,8 @@ func handlePDFRequestGin(c *gin.Context) {
 		return
 	}
 
+	helper.CrearCarpeta("tmp/")
+
 	var count int
 	for _, item := range data.Imagenes {
 		base64String := "data:image/" + item.Extension + ";base64," + item.Base64String
@@ -100,7 +102,7 @@ func handlePDFRequestGin(c *gin.Context) {
 		}
 
 		count++
-		err := helper.SaveImage(imageData, imageType, "pdf/"+strconv.Itoa(count)+"output."+item.Extension)
+		err := helper.SaveImage(imageData, imageType, "tmp/"+strconv.Itoa(count)+"output."+item.Extension)
 		if err != nil {
 			fmt.Println("Error al guardar la imagen:", err)
 			return

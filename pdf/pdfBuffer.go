@@ -1,13 +1,13 @@
 package pdf
 
 import (
+	"api-pdf/helper"
 	"bytes"
 	"strconv"
 
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
-	"github.com/signintech/gopdf"
 
 	"github.com/johnfercher/maroto/pkg/props"
 )
@@ -122,7 +122,7 @@ func builBody(m pdf.Maroto, info Data) {
 	// INFORMACIÓN DEL SISTEMA
 	m.SetBorder(true)
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("INFORMACIÓN DEL SISTEMA", props.Text{
@@ -176,7 +176,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// INFORMACIÓN DEL USUARIO
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("INFORMACIÓN DEL USUARIO", props.Text{
@@ -268,7 +268,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// REPORTADO POR
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("REPORTADO POR", props.Text{
@@ -322,7 +322,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// INCIDENCIA
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("INCIDENCIA", props.Text{
@@ -343,22 +343,24 @@ func builBody(m pdf.Maroto, info Data) {
 	})
 	m.SetBackgroundColor(color.NewWhite())
 
-	m.Row(16, func() {
-		m.Col(12, func() {
-			m.Text(info.Descripcion, props.Text{
-				Top:   1,
-				Left:  1,
-				Size:  10,
-				Style: consts.Bold,
-				Align: consts.Left,
-			})
-		})
+	textMultiline := props.Text{
+		Extrapolate: false,
+		Top:         1,
+		Left:        1,
+		Size:        10,
+		Style:       consts.Bold,
+		Align:       consts.Left,
+	}
 
+	m.Row(helper.CalcRowHeight(m, info.Descripcion, textMultiline, 12, 12)+2, func() {
+		m.Col(12, func() {
+			m.Text(info.Descripcion, textMultiline)
+		})
 	})
 
 	// DESCARTES
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("DESCARTES", props.Text{
@@ -437,7 +439,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// FLUJO
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("FLUJO", props.Text{
@@ -468,7 +470,7 @@ func builBody(m pdf.Maroto, info Data) {
 		count++
 		m.Row(75, func() {
 			m.Col(12, func() {
-				err := m.FileImage("pdf/"+strconv.Itoa(count)+"output."+item.Extension, props.Rect{
+				err := m.FileImage("tmp/"+strconv.Itoa(count)+"output."+item.Extension, props.Rect{
 					Center:  true,
 					Percent: 95,
 				})
@@ -485,17 +487,18 @@ func builBody(m pdf.Maroto, info Data) {
 		})
 
 		m.SetBackgroundColor(color.NewWhite())
+		textMultiline := props.Text{
+			Extrapolate: false,
+			Top:         1,
+			Left:        1,
+			Size:        10,
+			Style:       consts.Bold,
+			Align:       consts.Left,
+		}
 
-		m.Row(20, func() {
+		m.Row(helper.CalcRowHeight(m, item.Descripcion, textMultiline, 12, 12)+2, func() {
 			m.Col(12, func() {
-				m.Text(item.Descripcion, props.Text{
-					Extrapolate: false,
-					Top:         1,
-					Left:        1,
-					Size:        10,
-					Style:       consts.Bold,
-					Align:       consts.Left,
-				})
+				m.Text(item.Descripcion, textMultiline)
 
 			})
 
@@ -504,7 +507,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// Parámetros de prueba de Desarrollo*
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("Parámetros de prueba de Desarrollo*", props.Text{
@@ -569,7 +572,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	// Parámetros de prueba de Calidad (Testing)*
 
-	m.SetBackgroundColor(grayColor())
+	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("Parámetros de prueba de Calidad (Testing)*", props.Text{
@@ -634,18 +637,4 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.SetBorder(false)
 
-}
-
-func grayColor() color.Color {
-	return color.Color{
-		Red:   220,
-		Green: 220,
-		Blue:  220,
-	}
-}
-
-func getTextWidth(pdfMaroto gopdf.GoPdf, fontSize float64, text string) float64 {
-	pdfMaroto.SetFont("Helvetica", "", fontSize)
-	textWidth, _ := pdfMaroto.MeasureTextWidth(text)
-	return textWidth
 }
