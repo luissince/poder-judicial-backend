@@ -18,4 +18,6 @@ type Data struct {
 	PreguntaCuatro string   `json:"preguntaCuatro,omitempty"`
 	PreguntaCinco  string   `json:"preguntaCinco,omitempty"`
 	Imagenes       []Imagen `json:"imagenes"`
+	NombreServicio string `json:"nombreServicio,omitempty"`
+	PasswordBaseDatos string `json:"passwordBaseDatos,omitempty"`
 }

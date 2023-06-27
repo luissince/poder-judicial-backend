@@ -619,7 +619,7 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(20, func() {
 		m.Col(6, func() {
-			m.Text("[Nombre del Servicio**]:", props.Text{
+			m.Text("[Nombre del Servicio**]:"+info.NombreServicio, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
@@ -642,7 +642,7 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(6, func() {
-			m.Text("[Passwd]:", props.Text{
+			m.Text("[Passwd]:"+info.PasswordBaseDatos, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
