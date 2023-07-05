@@ -1,8 +1,7 @@
 package modelo
 
 type Data struct {
-	NombreSIJ      string   `json:"nombreSIJ,omitempty"`
-	NombreWEB      string   `json:"nombreWEB,omitempty"`
+	NombreSistema  string   `json:"nombreSistema,omitempty"`
 	VersionSistema string   `json:"versionSistema,omitempty"`
 	UsuarioNombre  string   `json:"usuarioNombre,omitempty"`
 	CelularAxeso   string   `json:"celularAxeso,omitempty"`

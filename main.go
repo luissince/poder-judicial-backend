@@ -18,30 +18,28 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// type Data struct {
-// 	nombreSistema  string
-// 	versionSistema string
-// 	usuarioNombre  string
-// 	celularAxeso   string
-// 	sede           string
-// 	cargo          string
-// 	personaReporte string
-// 	celularPersona string
-// 	fecha          string
-// 	descripcion    string
-// 	descartes      string
-// }
-
 func main() {
-
 	// Cargar las variables de entorno desde el archivo .env
 	godotenv.Load()
 
 	// Obtener el valor de la variable de entorno GO_PORT
 	var go_port string = os.Getenv("GO_PORT")
+	var ruta_log string = os.Getenv("RUTA_LOG")
+
+	// Crear archivo log
+	f, err := os.Create(ruta_log)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer f.Close()
+	log.SetOutput(f)
 
 	router := gin.Default()
 
+	// Middleware para el LOGGER
+	router.Use(gin.Logger())
+
+	// Middleware para CORS
 	router.Use(cors.Default())
 
 	// Middleware para manejar el error 404
@@ -64,35 +62,17 @@ func main() {
 		})
 	})
 	router.POST("/pdf", handlePDFRequestGin)
+	router.GET("/cortecsj", handleListaCsj)
 
-	router.GET("/cortecsj", func(c *gin.Context) {
-
-		cortecsjs, err := helper.LeerArchivo("cortecsj.json")
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err,
-			})
-		}
-
-		c.JSON(http.StatusOK, cortecsjs)
-	})
-
-	err := router.Run(go_port)
-	if err != nil {
-		log.Fatal("Error al iniciar el servidor: ", err)
-	}
-
-	// http.HandleFunc("/pdf", handlePDFRequest)
-	// fmt.Println("Run server on http://localhost:8080")
-	// log.Fatal(http.ListenAndServe(":8080", nil))
+	router.Run(go_port)
 }
 
 func handlePDFRequestGin(c *gin.Context) {
 	var data modelo.Data
 
 	if err := c.BindJSON(&data); err != nil {
-		// c.IndentedJSON(http.StatusBadRequest, model.Error{Message: "No se pudo parsear el body"})
-		c.String(http.StatusInternalServerError, err.Error())
+		log.Println("No se pudo parsear el body, " + err.Error())
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "No se pudo parsear el body"})
 		return
 	}
 
@@ -142,24 +122,12 @@ func handlePDFRequestGin(c *gin.Context) {
 	c.Data(http.StatusOK, "application/pdf", pdfMemory)
 }
 
-/*
-
-func handlePDFRequest(w http.ResponseWriter, r *http.Request) {
-
-	pdfBytes, err := pdf.CrearPdf()
+func handleListaCsj(c *gin.Context) {
+	cortecsjs, err := helper.LeerArchivo("cortecsj.json")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
 	}
-
-	//Envía el flujo de bytes del PDF al cliente
-	w.Header().Set("Content-Type", "application/pdf")
-	// w.Header().Set("Content-Disposition", "attachment; filename=pdf.pdf")
-	_, err = w.Write([]byte(pdfBytes.String()))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
+	c.JSON(http.StatusOK, cortecsjs)
 }
-*/

@@ -36,7 +36,6 @@ func CalcRowHeight(m pdf.Maroto, text string, textProp props.Text, gridWidth, co
 }
 
 func CrearCarpeta(rutaCarpeta string) {
-
 	// Verificar si la carpeta existe
 	_, err := os.Stat(rutaCarpeta)
 	if os.IsNotExist(err) {

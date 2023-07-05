@@ -23,7 +23,7 @@ COPY . .
 RUN go mod download
 
 # Create directory logs
-RUN mkdir /etc/push
+RUN mkdir /etc/app
 
 # Build the application
 RUN go build -o ./dist/main .
