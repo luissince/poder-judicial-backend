@@ -685,21 +685,21 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 
 	m.Row(20, func() {
 		m.Col(6, func() {
-			m.Text("[Nombre del Servicio**]: "+cortecsj.NombreServicio, props.Text{
+			m.Text("[Nombre del Servicio**]: "+cortecsj.NombreServicioTest, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Nombre BD]: "+cortecsj.NombreDb, props.Text{
+			m.Text("[Nombre BD]: "+cortecsj.NombreDbTest, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[User Id]: "+cortecsj.UserId, props.Text{
+			m.Text("[User Id]: "+cortecsj.UserIdTest, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,
@@ -708,21 +708,21 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 			})
 		})
 		m.Col(6, func() {
-			m.Text("[Password]: "+cortecsj.PasswordDb, props.Text{
+			m.Text("[Password]: "+cortecsj.PasswordDbTest, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[IP]: "+cortecsj.Ip, props.Text{
+			m.Text("[IP]: "+cortecsj.IpTest, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Puerto]: "+cortecsj.Puerto, props.Text{
+			m.Text("[Puerto]: "+cortecsj.PuertoTest, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,

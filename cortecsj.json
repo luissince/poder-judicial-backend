@@ -6,7 +6,13 @@
         "nombre_db":"nombre db",
         "ip":"ip",
         "user_id":"user id",
-        "puerto":"1000"
+        "puerto":"1000",
+        "nombre_servicio_test":"nombre servidor 1 test",
+        "password_db_test":"password test",
+        "nombre_db_test":"nombre db test",
+        "ip_test":"ip test",
+        "user_id_test":"user id test",
+        "puerto_test":"2000"
     },
     {
         "id": "2",
@@ -15,6 +21,12 @@
         "nombre_db":"nombre db",
         "ip":"ip",
         "user_id":"user id",
-        "puerto":"5000"
+        "puerto":"5000",
+        "nombre_servicio_test":"nombre servidor 2 test",
+        "password_db_test":"password test",
+        "nombre_db_test":"nombre db test",
+        "ip_test":"ip test",
+        "user_id_test":"user id test",
+        "puerto_test":"6000"
     }
 ]
