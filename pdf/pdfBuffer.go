@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"api-pdf/helper"
+	"api-pdf/modelo"
 	"bytes"
 	"strconv"
 
@@ -12,7 +13,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
-func CrearPdf(pdfData Data) (*bytes.Buffer, error) {
+func CrearPdf(pdfData modelo.Data) (*bytes.Buffer, error) {
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 10, 10)
@@ -117,7 +118,7 @@ func builHeading(m pdf.Maroto) {
 
 }
 
-func builBody(m pdf.Maroto, info Data) {
+func builBody(m pdf.Maroto, info modelo.Data) {
 
 	// INFORMACIÓN DEL SISTEMA
 	m.SetBorder(true)
@@ -603,12 +604,22 @@ func builBody(m pdf.Maroto, info Data) {
 	}
 
 	// Parámetros de prueba de Desarrollo*
+	var cortecsj modelo.CorteCsj
+
+	cortecsjs, _ := helper.LeerArchivo("cortecsj.json")
+	for _, item := range cortecsjs {
+		if item.Id == info.IdCorteCsj {
+			cortecsj = item
+			break
+		}
+	}
 
 	m.SetBackgroundColor(helper.GrayColor())
 	m.Row(8, func() {
 		m.Col(12, func() {
 			m.Text("Parámetros de prueba de Desarrollo*", props.Text{
 				Top:   1,
+				Left:  1,
 				Size:  12,
 				Style: consts.Bold,
 				Align: consts.Left,
@@ -619,21 +630,21 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(20, func() {
 		m.Col(6, func() {
-			m.Text("[Nombre del Servicio**]:"+info.NombreServicio, props.Text{
+			m.Text("[Nombre del Servicio**]: "+cortecsj.NombreServicio, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Nombre BD]:", props.Text{
+			m.Text("[Nombre BD]: "+cortecsj.NombreDb, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[User Id]:", props.Text{
+			m.Text("[User Id]: "+cortecsj.UserId, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,
@@ -642,21 +653,21 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(6, func() {
-			m.Text("[Passwd]:"+info.PasswordBaseDatos, props.Text{
+			m.Text("[Password]: "+cortecsj.PasswordDb, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[IP]:", props.Text{
+			m.Text("[IP]: "+cortecsj.Ip, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Puerto]:", props.Text{
+			m.Text("[Puerto]: "+cortecsj.Puerto, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,
@@ -674,6 +685,7 @@ func builBody(m pdf.Maroto, info Data) {
 		m.Col(12, func() {
 			m.Text("Parámetros de prueba de Calidad (Testing)*", props.Text{
 				Top:   1,
+				Left:  1,
 				Size:  12,
 				Style: consts.Bold,
 				Align: consts.Left,
@@ -684,21 +696,21 @@ func builBody(m pdf.Maroto, info Data) {
 
 	m.Row(20, func() {
 		m.Col(6, func() {
-			m.Text("[Nombre del Servicio**]:", props.Text{
+			m.Text("[Nombre del Servicio**]: "+cortecsj.NombreServicio, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Nombre BD]:", props.Text{
+			m.Text("[Nombre BD]: "+cortecsj.NombreDb, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[User Id]:", props.Text{
+			m.Text("[User Id]: "+cortecsj.UserId, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,
@@ -707,21 +719,21 @@ func builBody(m pdf.Maroto, info Data) {
 			})
 		})
 		m.Col(6, func() {
-			m.Text("[Passwd]:", props.Text{
+			m.Text("[Password]: "+cortecsj.PasswordDb, props.Text{
 				Top:   1,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[IP]:", props.Text{
+			m.Text("[IP]: "+cortecsj.Ip, props.Text{
 				Top:   7,
 				Left:  1,
 				Size:  10,
 				Style: consts.Normal,
 				Align: consts.Left,
 			})
-			m.Text("[Puerto]:", props.Text{
+			m.Text("[Puerto]: "+cortecsj.Puerto, props.Text{
 				Top:   13,
 				Left:  1,
 				Size:  10,

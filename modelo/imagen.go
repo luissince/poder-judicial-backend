@@ -1,4 +1,4 @@
-package pdf
+package modelo
 
 type Imagen struct {
 	Base64String string `json:"base64String"`

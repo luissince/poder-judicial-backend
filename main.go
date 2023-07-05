@@ -2,6 +2,7 @@ package main
 
 import (
 	"api-pdf/helper"
+	"api-pdf/modelo"
 	"api-pdf/pdf"
 	"fmt"
 	_ "image/jpeg" // Importa el formato JPEG
@@ -64,6 +65,18 @@ func main() {
 	})
 	router.POST("/pdf", handlePDFRequestGin)
 
+	router.GET("/cortecsj", func(c *gin.Context) {
+
+		cortecsjs, err := helper.LeerArchivo("cortecsj.json")
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": err,
+			})
+		}
+
+		c.JSON(http.StatusOK, cortecsjs)
+	})
+
 	err := router.Run(go_port)
 	if err != nil {
 		log.Fatal("Error al iniciar el servidor: ", err)
@@ -75,7 +88,7 @@ func main() {
 }
 
 func handlePDFRequestGin(c *gin.Context) {
-	var data pdf.Data
+	var data modelo.Data
 
 	if err := c.BindJSON(&data); err != nil {
 		// c.IndentedJSON(http.StatusBadRequest, model.Error{Message: "No se pudo parsear el body"})

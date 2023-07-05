@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "nombre_servicio":"nombre servidor 1",
+        "password_db":"password",
+        "nombre_db":"nombre db",
+        "ip":"ip",
+        "user_id":"user id",
+        "puerto":"1000"
+    },
+    {
+        "id": "2",
+        "nombre_servicio":"nombre servidor 2",
+        "password_db":"password",
+        "nombre_db":"nombre db",
+        "ip":"ip",
+        "user_id":"user id",
+        "puerto":"5000"
+    }
+]

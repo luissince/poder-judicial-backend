@@ -1,7 +1,10 @@
 package helper
 
 import (
+	"api-pdf/modelo"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 
@@ -59,4 +62,30 @@ func TernarioSiNo(valor string, evaluar string) string {
 		return strings.ToUpper(valor)
 	}
 	return ""
+}
+
+func LeerArchivo(ruta string) ([]modelo.CorteCsj, error) {
+	// Abrir el archivo JSON
+	file, err := os.Open(ruta)
+	if err != nil {
+		return nil, fmt.Errorf("Error al abrir el archivo: %v", err)
+	}
+
+	defer file.Close()
+
+	// Leer el contenido del archivo
+	content, err := ioutil.ReadAll(file)
+	if err != nil {
+		return nil, fmt.Errorf("Error al leer el archivo: %v", err)
+	}
+
+	// Decodificar el contenido en la estructura de datos
+	var cortecsjs []modelo.CorteCsj
+	err = json.Unmarshal(content, &cortecsjs)
+	if err != nil {
+		return nil, fmt.Errorf("Error al decodificar el JSON: %v", err)
+	}
+
+	// Acceder a los datos leídos
+	return cortecsjs, nil
 }
