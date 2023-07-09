@@ -55,12 +55,6 @@ func main() {
 			"message": "API GO LANG APP MOVIL UPLA",
 		})
 	})
-
-	router.GET("/base64", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "BASE 64 CONVERTOR",
-		})
-	})
 	router.POST("/pdf", handlePDFRequestGin)
 	router.GET("/cortecsj", handleListaCsj)
 
