@@ -537,24 +537,54 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 			})
 		})
 	})
-	m.SetBackgroundColor(color.NewWhite())
-
-	m.Row(8, func() {
-		m.Col(12, func() {
-			m.Text("Pantalla_01 (Obligatorio SIJ): Versión del sistema | Usuario | Cargo ", props.Text{
-				Top:   1,
-				Left:  1,
-				Size:  10,
-				Style: consts.Bold,
-				Align: consts.Left,
-			})
-		})
-
-	})
 
 	var count int
 	for _, item := range info.Imagenes {
 		count++
+
+		m.SetBackgroundColor(color.NewWhite())
+
+		textMultiline := props.Text{
+			Extrapolate: false,
+			Top:         6,
+			Left:        1,
+			Size:        10,
+			Style:       consts.Bold,
+			Align:       consts.Left,
+		}
+
+		m.Row(helper.CalcRowHeight(m, item.Descripcion, textMultiline, 12, 12)+2, func() {
+			m.Col(12, func() {
+				m.Text("Pantalla_"+strconv.Itoa(count), props.Text{
+					Top:   1,
+					Left:  1,
+					Size:  10,
+					Style: consts.Bold,
+					Align: consts.Left,
+				})
+				m.Text("(Obligatorio SIJ):", props.Text{
+					Top:   1,
+					Left:  19,
+					Size:  10,
+					Style: consts.Bold,
+					Align: consts.Left,
+					Color: color.Color{
+						Red:   224,
+						Green: 36,
+						Blue:  37,
+					},
+				})
+				m.Text("Versión del sistema | Usuario | Cargo.", props.Text{
+					Top:   1,
+					Left:  49,
+					Size:  10,
+					Style: consts.Bold,
+					Align: consts.Left,
+				})
+				m.Text(item.Descripcion, textMultiline)
+			})
+		})
+
 		m.Row(75, func() {
 			m.Col(12, func() {
 				err := m.FileImage("tmp/"+strconv.Itoa(count)+"output."+item.Extension, props.Rect{
@@ -571,24 +601,6 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 					})
 				}
 			})
-		})
-
-		m.SetBackgroundColor(color.NewWhite())
-		textMultiline := props.Text{
-			Extrapolate: false,
-			Top:         1,
-			Left:        1,
-			Size:        10,
-			Style:       consts.Bold,
-			Align:       consts.Left,
-		}
-
-		m.Row(helper.CalcRowHeight(m, item.Descripcion, textMultiline, 12, 12)+2, func() {
-			m.Col(12, func() {
-				m.Text(item.Descripcion, textMultiline)
-
-			})
-
 		})
 	}
 
