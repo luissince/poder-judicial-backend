@@ -564,7 +564,7 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 				})
 				m.Text("(Obligatorio SIJ):", props.Text{
 					Top:   1,
-					Left:  19,
+					Left:  21,
 					Size:  10,
 					Style: consts.Bold,
 					Align: consts.Left,
@@ -576,7 +576,7 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 				})
 				m.Text("Versión del sistema | Usuario | Cargo.", props.Text{
 					Top:   1,
-					Left:  49,
+					Left:  51,
 					Size:  10,
 					Style: consts.Bold,
 					Align: consts.Left,
