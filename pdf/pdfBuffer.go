@@ -555,7 +555,7 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 
 		m.Row(helper.CalcRowHeight(m, item.Descripcion, textMultiline, 12, 12)+2, func() {
 			m.Col(12, func() {
-				m.Text("Pantalla_"+strconv.Itoa(count), props.Text{
+				m.Text("Pantalla_"+helper.NumbertToString(count), props.Text{
 					Top:   1,
 					Left:  1,
 					Size:  10,

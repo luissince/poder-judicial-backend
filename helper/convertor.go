@@ -7,6 +7,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -77,4 +78,12 @@ func SaveImage(imageData []byte, imageType, filename string) error {
 	}
 
 	return nil
+}
+
+func NumbertToString(number int) string {
+	if number < 9 {
+		return "0" + strconv.Itoa(number)
+	}
+
+	return strconv.Itoa(number)
 }
