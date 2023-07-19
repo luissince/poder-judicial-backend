@@ -46,5 +46,21 @@
         "ip_test":"172.17.16.50",
         "user_id_test":"dba",
         "password_db_test":"sql"
+    },
+    {
+        "id": "4",
+        "nombre_corte":"04 - Ucayali",
+        "nombre_servicio":"srv11_02_exped_desa",
+        "nombre_db":"sij11_001_02_01",
+        "puerto":"2912",
+        "ip":": 172.17.16.50",
+        "user_id":"dba",
+        "password_db":"sql",
+        "nombre_servicio_test":"srv11_02_exped_test",
+        "nombre_db_test":"sij11_001_02_01",
+        "puerto_test":"2812",
+        "ip_test":"172.17.16.50",
+        "user_id_test":"dba",
+        "password_db_test":"sql"
     }
 ]
