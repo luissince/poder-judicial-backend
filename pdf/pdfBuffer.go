@@ -574,7 +574,7 @@ func builBody(m pdf.Maroto, info modelo.Data) {
 						Blue:  37,
 					},
 				})
-				m.Text("Versión del sistema | Usuario | Cargo.", props.Text{
+				m.Text("- Descripción breve de la captura de pantalla: ", props.Text{
 					Top:   1,
 					Left:  51,
 					Size:  10,
