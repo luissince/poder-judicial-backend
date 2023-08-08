@@ -12,22 +12,29 @@ jobs:
 
     runs-on: self-hosted
 
+    env:  
+      GO_PORT: ${{ secrets.GO_PORT }}
+      RUTA_LOG: ${{ secrets.RUTA_LOG }}
+      TZ_LOCATION: ${{ secrets.TZ_LOCATION }}
+
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
 
       - name: Crear archivo .env
         run: cp .env.example .env
-
+      
       - name: Editar archivo .env
         run: |
-          sed -i 's/VITE_URL_APP = ""/VITE_URL_APP = "https:\/\/tp.syssoftintegra.com\/servicios\/pj"/' .env
-          
+          sed -i "s~GO_PORT=\"\"~GO_PORT=\"$GO_PORT\"~" .env
+          sed -i "s~RUTA_LOG=\"\"~RUTA_LOG=\"$RUTA_LOG\"~" .env
+          sed -i "s~TZ_LOCATION=\"\"~TZ_LOCATION=\"$TZ_LOCATION\"~" .env
+
       - name: Mostrar contenido del archivo .env
         run: cat .env
 
       - name: Create container
-        run: docker-compose up --build -d
+        run: docker compose up --build -d
       # - name: Build the Docker image
         # run: sudo docker stop next-app && sudo docker rm next-app
       # - name: Remove existing image
